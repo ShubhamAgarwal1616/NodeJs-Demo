@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const expressHbs = require('express-handlebars');
+// const expressHbs = require('express-handlebars');
 
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -15,13 +15,16 @@ const app = express();
 // app.set('views', 'views/pugViews');
 
 // make a express-handlebars engines and pass it to view engine just like pug
-app.engine('hbs', expressHbs({
-  layoutsDir: 'views/handlebarViews/layouts',
-  defaultLayout: 'main-layout',
-  extname: 'hbs',
-}));
-app.set('view engine', 'hbs');
-app.set('views', 'views/handlebarViews');
+// app.engine('hbs', expressHbs({
+//   layoutsDir: 'views/handlebarViews/layouts',
+//   defaultLayout: 'main-layout',
+//   extname: 'hbs',
+// }));
+// app.set('view engine', 'hbs');
+// app.set('views', 'views/handlebarViews');
+
+app.set('view engine', 'ejs');
+app.set('views', 'views/ejsViews');
 
 // This middleware is required to parse the body of all requests and hence it needs to be on top.
 // The body parser calls next internally and hence we do not need to call it
