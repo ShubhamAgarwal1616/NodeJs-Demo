@@ -13,7 +13,16 @@ router.get('/add-product', (req, res, next) => {
   // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 
   // tell which pug file to render and pass data to it in JS object
-  res.render('add-product', {pageTitle: 'Add Product', path: '/admin/add-product'});
+  // res.render('add-product', {pageTitle: 'Add Product', path: '/admin/add-product'});
+
+  // handleBars do not support logic so we have to pass all logical values in data
+  res.render('add-product', {
+    pageTitle: 'Add Product',
+    path: '/admin/add-product',
+    formsCSS: true,
+    productCSS: true,
+    activeAddProduct: true
+  });
 
 })
 

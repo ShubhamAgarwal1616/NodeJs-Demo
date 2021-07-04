@@ -15,7 +15,16 @@ router.get('/', (req, res, next) => {
 
   const products = adminData.products;
   // tell which pug file to render and pass data to it in JS object
-  res.render('shop', {products: products, pageTitle: 'Shop', path: '/'});
+  // res.render('shop', {products: products, pageTitle: 'Shop', path: '/'});
+
+  // handleBars do not support logic in if else hence while using them we need to send hasProducts
+  res.render('shop', {
+    products: products,
+    pageTitle: 'Shop', path: '/',
+    hasProducts: products.length > 0,
+    activeShop: true,
+    productCSS: true,
+  });
 })
 
 module.exports = router;
