@@ -4,17 +4,23 @@ const rootDir = require('../path/util')
 
 const router = express.Router();
 
+const products = [];
+
 router.get('/add-product', (req, res, next) => {
   // res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
 
   // In root dir we have absolute path to app.js
-  res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
+  // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
+
+  // tell which pug file to render and pass data to it in JS object
+  res.render('add-product', {pageTitle: 'Add Product', path: '/admin/add-product'});
 
 })
 
 router.post('/add-product', (req, res, next) => {
-  console.log(req.body);
+  products.push({title: req.body.title});
   res.redirect('/');
 })
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;

@@ -3,10 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
+
+// add config to app o use pug for dynamic html
+app.set('view engine', 'pug');
+// set location where our views are, views is by default so if we use another dir name we need to set it.
+app.set('views', 'views/pugViews');
 
 // This middleware is required to parse the body of all requests and hence it needs to be on top.
 // The body parser calls next internally and hence we do not need to call it
@@ -16,11 +21,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 // this will allow to use css files to be accessible in html files using file system path
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  res.status(404).render('404', {pageTitle: 'Page Not Found'});
 })
 
 app.listen(3000);
